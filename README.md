@@ -1,29 +1,64 @@
 # Flex y Bison – Ejercicios Capítulo 1
 
-Implementación completa de los ejercicios 1–6 del Capítulo 1 del libro  
-**Flex & Bison – John Levine**.
+Implementación completa de los ejercicios 1 al 6 del Capítulo 1 del libro:
 
-Desarrollado en macOS utilizando:
+Flex & Bison – John Levine
 
-- flex (Homebrew)
-- bison (Homebrew)
-- gcc / clang
+Proyecto desarrollado en macOS usando flex y bison instalados con Homebrew.
 
 ---
 
 ## 📁 Estructura del Proyecto
 
+```
 Flex y Bison ejercicios/
+│
+├── ej1.l
+├── ej2.l
+├── ej3.l
+├── ej4.l
+├── ej4.y
+└── README.md
+```
 
-├── ej1.l # Ejercicio 1 – Contador extendido
-├── ej2.l # Ejercicio 2 – Nueva definición de palabra
-├── ej3.l # Ejercicio 3 – Traductor British → American
-├── ej4.l # Scanner calculadora (Ej. 4, 5 y 6)
-├── ej4.y # Parser calculadora extendida
+Archivos generados automáticamente (NO se suben al repositorio):
+
+```
+a.out
+lex.yy.c
+ej4.tab.c
+ej4.tab.h
+```
 
 ---
 
-# 🔹 Ejercicio 1 – Contador Extendido
+# 🔧 Requisitos
+
+Instalar dependencias:
+
+```
+brew install flex
+brew install bison
+```
+
+Agregar al PATH (Apple Silicon):
+
+```
+export PATH="/opt/homebrew/opt/bison/bin:/opt/homebrew/opt/flex/bin:$PATH"
+```
+
+Verificar instalación:
+
+```
+which flex
+which bison
+flex --version
+bison --version
+```
+
+---
+
+# 📘 Ejercicio 1 – Contador Extendido
 
 Cuenta:
 
@@ -32,48 +67,60 @@ Cuenta:
 - Números
 - Caracteres
 
-### Compilación
+Compilar:
 
+```
 flex ej1.l
 gcc lex.yy.c -L/opt/homebrew/opt/flex/lib -lfl
+```
 
-### Ejecución
+Ejecutar:
 
+```
 ./a.out
+```
 
 ---
 
-# 🔹 Ejercicio 2 – Redefinición de Palabra
+# 📘 Ejercicio 2 – Nueva Definición de Palabra
 
 Palabra definida como cualquier secuencia que no sea whitespace:
 
+```
 [^\t\n ]+
+```
 
-### Compilación
+Compilar:
 
+```
 flex ej2.l
 gcc lex.yy.c -L/opt/homebrew/opt/flex/lib -lfl
+```
 
 ---
 
-# 🔹 Ejercicio 3 – Traductor British → American
+# 📘 Ejercicio 3 – Traductor British → American
 
-Traduce palabras respetando mayúsculas.
+Traduce palabras respetando mayúsculas y minúsculas.
 
-Ejemplos:
+Ejemplo:
 
-Colour → Color
-COLOUR → COLOR
-colour → color
+```
+Colour   → Color
+COLOUR   → COLOR
+colour   → color
+```
 
-### Compilación
+Compilar:
 
+```
 flex ej3.l
 gcc lex.yy.c -L/opt/homebrew/opt/flex/lib -lfl
+```
 
 ---
 
-# 🔹 Ejercicio 4 – Calculadora con Paréntesis
+# 📘 Ejercicio 4 – Calculadora con Paréntesis
 
 Soporta:
 
@@ -84,65 +131,82 @@ Soporta:
 - Paréntesis
 - Precedencia correcta
 
-### Compilación
+Compilar:
 
+```
 bison -d ej4.y
 flex ej4.l
 gcc ej4.tab.c lex.yy.c -L/opt/homebrew/opt/flex/lib -lfl
-
-### Ejemplo
-
-(3+4)*2
-= 14
-
----
-
-# 🔹 Ejercicio 5 – Operador Potencia
-
-Agrega:
-
-^
-
-Con asociatividad derecha:
-
-%right '^'
+```
 
 Ejemplo:
 
-2^3^2
-= 512
+```
+(3+4)*2
+= 14
+```
 
 ---
 
-# 🔹 Ejercicio 6 – Menos Unario
+# 📘 Ejercicio 5 – Operador Potencia
 
-Implementado con precedencia correcta:
+Agrega operador:
 
+```
+^
+```
+
+Declaración de precedencia:
+
+```
+%right '^'
+```
+
+Ejemplo:
+
+```
+2^3^2
+= 512
+```
+
+Asociatividad derecha verificada.
+
+---
+
+# 📘 Ejercicio 6 – Menos Unario
+
+Implementado con precedencia correcta usando:
+
+```
 %right UMINUS
 | '-' expr %prec UMINUS
+```
 
 Ejemplos:
 
--5 → -5
--2^3 → -8
-(-2)^3 → -8
+```
+-5        → -5
+-2^3      → -8
+(-2)^3    → -8
+```
+
+La potencia tiene mayor precedencia que el menos unario.
 
 ---
 
-# ⚙ Requisitos
+# ▶ Compilación General (Calculadora)
 
-Instalar dependencias:
-
-brew install flex
-brew install bison
-
-Agregar al PATH (Apple Silicon):
-
-export PATH="/opt/homebrew/opt/bison/bin:/opt/homebrew/opt/flex/bin:$PATH"
+```
+rm ej4.tab.c ej4.tab.h lex.yy.c a.out
+bison -d ej4.y
+flex ej4.l
+gcc ej4.tab.c lex.yy.c -L/opt/homebrew/opt/flex/lib -lfl
+./a.out
+```
 
 ---
 
-# ✅ Estado
+# ✅ Estado del Proyecto
 
 ✔ Ejercicio 1  
 ✔ Ejercicio 2  
