@@ -77,9 +77,9 @@ gcc lex.yy.c -L/opt/homebrew/opt/flex/lib -lfl
 
 Soporta:
 
-- +
-- -
-- *
+- ++
+- --
+- **
 - /
 - Paréntesis
 - Precedencia correcta
