@@ -20,16 +20,6 @@ Flex y Bison ejercicios/
 ├── ej4.y
 └── README.md
 ```
-
-Archivos generados automáticamente (NO se suben al repositorio):
-
-```
-a.out
-lex.yy.c
-ej4.tab.c
-ej4.tab.h
-```
-
 ---
 
 # 🔧 Requisitos
