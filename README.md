@@ -14,7 +14,7 @@ Desarrollado en macOS utilizando:
 ## 📁 Estructura del Proyecto
 
 Flex y Bison ejercicios/
-│
+
 ├── ej1.l # Ejercicio 1 – Contador extendido
 ├── ej2.l # Ejercicio 2 – Nueva definición de palabra
 ├── ej3.l # Ejercicio 3 – Traductor British → American
@@ -77,9 +77,9 @@ gcc lex.yy.c -L/opt/homebrew/opt/flex/lib -lfl
 
 Soporta:
 
-- ++
-- --
-- **
+- +
+- -
+- *
 - /
 - Paréntesis
 - Precedencia correcta
